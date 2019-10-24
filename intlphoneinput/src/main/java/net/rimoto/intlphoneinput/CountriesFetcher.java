@@ -73,6 +73,9 @@ public class CountriesFetcher {
          * @return index of the item in the list
          */
         public int indexOfIso(String iso) {
+            if (iso == null){
+                return -1;
+            }
             for (int i = 0; i < this.size(); i++) {
                 if (this.get(i) != null && this.get(i).getIso().toUpperCase().equals(iso.toUpperCase())) {
                     return i;
