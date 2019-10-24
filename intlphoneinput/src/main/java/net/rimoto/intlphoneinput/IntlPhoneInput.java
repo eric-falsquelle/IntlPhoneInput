@@ -164,7 +164,7 @@ public class IntlPhoneInput extends RelativeLayout {
         int defaultIdx = mCountries.indexOfIso(iso);
 	if (defaultIdx == -1) {
 	    defaultIdx = 0;
-	}    
+	}
         mSelectedCountry = mCountries.get(defaultIdx);
         mCountrySpinner.setSelection(defaultIdx);
     }
@@ -266,13 +266,19 @@ public class IntlPhoneInput extends RelativeLayout {
                 iso = mSelectedCountry.getIso();
             }
             Phonenumber.PhoneNumber phoneNumber = mPhoneUtil.parse(number, iso);
-			
+
             int countryIdx = mCountries.indexOfIso(mPhoneUtil.getRegionCodeForNumber(phoneNumber));
-			mSelectedCountry = mCountries.get(countryIdx);		
-            mCountrySpinner.setSelection(countryIdx);
-			
-			
-            mPhoneEdit.setText(mPhoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL));
+            if (countryIdx > -1){
+                mSelectedCountry = mCountries.get(countryIdx);
+                mCountrySpinner.setSelection(countryIdx);
+
+                mPhoneEdit.setText(mPhoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL));
+            }else{
+                if (mCountries != null && mCountries.size > 0){
+                    mCountrySpinner.setSelection(0);
+                }
+                mPhoneEdit.setText("");
+            }
         } catch (NumberParseException ignored) {
         }
     }
