@@ -274,7 +274,7 @@ public class IntlPhoneInput extends RelativeLayout {
 
                 mPhoneEdit.setText(mPhoneUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.NATIONAL));
             }else{
-                if (mCountries != null && mCountries.size > 0){
+                if (mCountries != null && mCountries.size() > 0){
                     mCountrySpinner.setSelection(0);
                 }
                 mPhoneEdit.setText("");
